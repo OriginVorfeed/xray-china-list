@@ -1,0 +1,8 @@
+[SwitchyOmega Conditions]
+; Require: https://github.com/zero-peak/ZeroOmega
+; Update @ Wed May 13 12:19:17 2026
+
+; 局域网IP不走代理
+IpCondition: 10.0.0.0/8
+IpCondition: 172.16.0.0/12
+IpCondition: 192.168.0.0/16
