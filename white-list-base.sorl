@@ -1,6 +1,5 @@
 [SwitchyOmega Conditions]
+@with result
 
 ; 局域网IP不走代理
-10.0.0.0/8
-172.16.0.0/12
-192.168.0.0/16
+Ip: 10.0.0.0/8 +direct
