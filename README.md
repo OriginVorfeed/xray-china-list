@@ -1,1 +1,1 @@
-# switchyomega-china-list
+# xray-china-list
