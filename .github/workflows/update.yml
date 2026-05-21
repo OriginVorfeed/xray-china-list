@@ -48,7 +48,7 @@ jobs:
             # 移动纯域名文本到目录中，去掉 .raw.txt 后缀
             mv "$file.raw.txt" "data/$tag_name"
 
-            # 清理中间文件
+            # 清理原始文件
             rm "$file.conf"
           done
 
