@@ -1,0 +1,75 @@
+name: Update Xray Rules
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每天凌晨自动运行
+  workflow_dispatch: # 支持手动触发
+
+# 显式赋予写入权限
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+        # 配置 Go 环境用来运行编译工具
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '>=1.21'
+
+      - name: Download and Convert
+        run: |
+          # 定义需要转换的文件列表
+          files=("accelerated-domains.china" "google.china" "apple.china")
+
+          for file in "${files[@]}"; do
+            # 下载原始文件
+            curl -sSL "https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/$file.conf" -o "$file.conf"
+          done
+
+          # 下载官方的 Makefile
+          curl -sSL "https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/Makefile" -o "Makefile"
+
+          # 提取纯域名
+          make raw
+
+          # 创建存放 dat 源码的临时目录
+          mkdir -p geosite-data
+
+          for file in "${files[@]}"; do
+            # 将文件名转换为符合标准的 geosite 标签名 (Tag)
+            tag_name="${file%.china}"
+
+            # 移动纯域名文本到目录中，去掉 .raw.txt 后缀
+            mv "$file.raw.txt" "geosite-data/$tag_name"
+
+            # 清理中间文件
+            rm "$file.conf"
+          done
+
+          # 拉取 v2fly 官方的 geosite 编译器源码
+          git clone --depth=1 https://github.com/v2fly/domain-list-community.git compiler
+          
+          # 编译生成 .dat 文件
+          cd compiler
+          go run ./ --datapath=../geosite-data --outputdir=../
+          cd ..
+
+          # 将默认生成的 dlc.dat 重命名为 xray-china-list.dat
+          mv dlc.dat xray-china-list.dat
+
+          # 清理临时目录
+          rm -rf geosite-data compiler Makefile
+
+      - name: Git push
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Action"
+          git add xray-china-list.dat
+          git commit -m "Update rules: $(date)" || exit 0
+          git push
