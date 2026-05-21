@@ -39,14 +39,14 @@ jobs:
           make raw
 
           # 创建存放 dat 源码的临时目录
-          mkdir -p geosite-data
+          mkdir -p data
 
           for file in "${files[@]}"; do
             # 将文件名转换为符合标准的 geosite 标签名 (Tag)
             tag_name="${file%.china}"
 
             # 移动纯域名文本到目录中，去掉 .raw.txt 后缀
-            mv "$file.raw.txt" "geosite-data/$tag_name"
+            mv "$file.raw.txt" "data/$tag_name"
 
             # 清理中间文件
             rm "$file.conf"
@@ -57,19 +57,19 @@ jobs:
           
           # 编译生成 .dat 文件
           cd compiler
-          go run ./ --datapath=../geosite-data --outputdir=../
+          go run ./ --datapath=../data --outputdir=../
           cd ..
 
           # 将默认生成的 dlc.dat 重命名为 xray-china-list.dat
           mv dlc.dat xray-china-list.dat
 
-          # 清理临时目录
-          rm -rf geosite-data compiler Makefile
+          # 清理临时文件
+          rm -rf compiler Makefile
 
       - name: Git push
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Action"
-          git add xray-china-list.dat
+          git add xray-china-list.dat data/
           git commit -m "Update rules: $(date)" || exit 0
           git push
