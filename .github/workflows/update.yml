@@ -71,5 +71,5 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Action"
           git add xray-china-list.dat data/
-          git commit -m "Update rules: $(date)"
+          git commit -m "Update rules: $(date)" || exit 0
           git push
