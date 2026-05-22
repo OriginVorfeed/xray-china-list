@@ -60,8 +60,8 @@ jobs:
           go run ./ --datapath=../data --outputdir=../
           cd ..
 
-          # 将默认生成的 dlc.dat 重命名为 xray-china-list.dat
-          mv dlc.dat xray-china-list.dat
+          # 将默认生成的 dlc.dat 重命名为 geosite.dat
+          mv dlc.dat geosite.dat
 
           # 清理临时文件
           rm -rf compiler Makefile
@@ -70,6 +70,6 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Action"
-          git add xray-china-list.dat data/
+          git add geosite.dat data/
           git commit -m "Update rules: $(date)" || exit 0
           git push
