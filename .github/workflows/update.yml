@@ -66,10 +66,13 @@ jobs:
           # 清理临时文件
           rm -rf compiler Makefile
 
+          # 额外添加 geoip.dat，方便 v2rayN 配置 Geo 文件来源
+          curl -sSL "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat" -o "geoip.dat"
+
       - name: Git push
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Action"
-          git add geosite.dat data/
+          git add geosite.dat geoip.dat data/
           git commit -m "Update rules: $(date)" || exit 0
           git push
