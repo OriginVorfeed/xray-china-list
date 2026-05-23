@@ -45,11 +45,12 @@ jobs:
             # 将文件名转换为符合标准的 geosite 标签名 (Tag)
             tag_name="${file%.china}"
 
-            # 移动纯域名文本到目录中，去掉 .raw.txt 后缀
-            mv "$file.raw.txt" "data/$tag_name"
+            # 移动纯域名文本到目录中，显式添加 domain: 前缀
+            sed 's/^/domain:/' "$file.raw.txt" > "data/$tag_name"
 
-            # 清理原始文件
+            # 清理中间文件
             rm "$file.conf"
+            rm "$file.raw.txt"
           done
 
           # 拉取 v2fly 官方的 geosite 编译器源码
