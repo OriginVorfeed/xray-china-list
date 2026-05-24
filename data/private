@@ -1,0 +1,9 @@
+full:lan
+domain:localdomain
+domain:example
+domain:invalid
+domain:localhost
+domain:test
+domain:local
+domain:home.arpa
+domain:internal
