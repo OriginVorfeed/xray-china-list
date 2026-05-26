@@ -43,7 +43,11 @@ jobs:
 
           for file in "${files[@]}"; do
             # 将文件名转换为符合标准的 geosite 标签名 (Tag)
-            tag_name="${file%.china}"
+            if [[ "$file" == "accelerated-domains.china" ]]; then
+              tag_name="cn"
+            else
+              tag_name="${file%.china}"
+            fi
 
             # 移动纯域名文本到目录中，显式添加 domain: 前缀
             sed 's/^/domain:/' "$file.raw.txt" > "data/$tag_name"
