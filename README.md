@@ -18,6 +18,11 @@
 
 可以在 [data 目录](https://github.com/OriginVorfeed/xray-china-list/tree/main/data) 查看编译前的源文件。
 
+提供2个下载链接，第1个需要代理才能稳定访问，第2个可以直接访问，但会延迟12小时。
+
+- [https://raw.githubusercontent.com/OriginVorfeed/xray-china-list/master/geosite.dat](https://raw.githubusercontent.com/OriginVorfeed/xray-china-list/master/geosite.dat)
+- [https://cdn.jsdelivr.net/gh/OriginVorfeed/xray-china-list@master/geosite.dat](https://cdn.jsdelivr.net/gh/OriginVorfeed/xray-china-list@master/geosite.dat)
+
 作为精简版白名单分流规则，仅包含以下类别：
 
 - **geosite:cn**
