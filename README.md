@@ -113,6 +113,7 @@
   - 重命名 geosite.dat，并放置于 `v2rayN\bin` 目录下。注意不要覆盖预置的 geosite.dat。
   - `设置 -> 路由设置 -> 规则集设置 -> 路由规则详情设置`，填写 `ext:xray-china-list.dat:cn`，和其他需要的规则。
   - 应用设置后，即可测试分流行为是否符合预期。
+
     > 然而，目前 v2rayN 在生成 sing-box 配置时，会跳过形如 `ext:xray-china-list.dat:cn` 的规则，导致两者分流行为不一致。
 
 ## 问题反馈
