@@ -45,7 +45,7 @@
 
 ## 使用方法
 
-- 推荐配合 [v2rayN](https://github.com/2dust/v2rayn) 使用，填写 `设置 -> 参数设置 -> v2rayN 设置  -> Geo 文件来源`，任选其一：
+- 推荐配合 [v2rayN](https://github.com/2dust/v2rayn) 使用，填写 `设置 -> 参数设置 -> v2rayN 设置 -> Geo 文件来源`，任选其一：
 
   ```
   # 需要代理
@@ -104,7 +104,16 @@
 
 - **如何恢复 v2rayN 默认的 Xray dat文件？**
 
-  清空 `设置 -> 参数设置 -> v2rayN 设置  -> Geo 文件来源` 后，再次更新 GeoFiles 即可。
+  清空 `设置 -> 参数设置 -> v2rayN 设置 -> Geo 文件来源` 后，再次更新 GeoFiles 即可。
+
+- **可以不覆盖 v2rayN 预置的规则文件吗？**
+
+  可以，但不推荐，无论如何都会造成 Xray、sing-box 分流行为不一致。如果你不介意这点，配置方法如下：
+
+  - 重命名 geosite.dat，并放置于 `v2rayN\bin` 目录下。注意不要覆盖预置的 geosite.dat。
+  - `设置 -> 路由设置 -> 规则集设置 -> 路由规则详情设置`，填写 `ext:xray-china-list.dat:cn`，和其他需要的规则。
+  - 应用设置后，即可测试分流行为是否符合预期。
+    > 然而，目前 v2rayN 在生成 sing-box 配置时，会跳过形如 `ext:xray-china-list.dat:cn` 的规则，导致两者分流行为不一致。
 
 ## 问题反馈
 
