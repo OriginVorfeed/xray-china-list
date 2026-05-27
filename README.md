@@ -18,7 +18,7 @@
 
 可以在 [data 目录](https://github.com/OriginVorfeed/xray-china-list/tree/main/data) 查看编译前的源文件。
 
-仅包含以下类别：
+作为精简版白名单分流规则，仅包含以下类别：
 
 - **geosite:cn**
 
@@ -36,6 +36,8 @@
 
   可选规则，不推荐使用。你要是发现熟悉的网页上，一些图标突然变成了文字，就是直连 fonts.gstatic.com 不稳定导致的。
 
+> 不包含任何 GFWList、广告过滤等类别。
+
 ## 使用方法
 
 - 推荐配合 [v2rayN](https://github.com/2dust/v2rayn) 使用，填写 `设置 -> 参数设置 -> v2rayN 设置  -> Geo 文件来源`，任选其一：
@@ -51,7 +53,9 @@
 - `帮助 -> 检查更新`，勾选 GeoFiles，点击 `检查更新`。
 - 文件名已匹配预置的 `绕过大陆(Whitelist)` 规则集，可以直接 `设为活动规则`。
 
-> 单独配置请参考 [Xray 官方文档](https://xtls.github.io/config/routing.html)，合并以下内容：
+> 单独配置时，重命名 geosite.dat，即可和其他 Xray dat 文件配合使用。
+>
+> 请参考 [Xray 官方文档](https://xtls.github.io/config/routing.html)，合并以下内容：
 
 ```json
 {
@@ -68,9 +72,9 @@
         "type": "field",
         "outboundTag": "direct",
         "domain": [
-          "geosite:private",
-          "geosite:cn",
-          "geosite:apple"
+          "ext:xray-china-list.dat:private",
+          "ext:xray-china-list.dat:cn",
+          "ext:xray-china-list.dat:apple"
         ]
       },
       {
