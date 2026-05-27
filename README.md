@@ -102,7 +102,7 @@
 
 ## 常见问题
 
-- **如何恢复 v2rayN 默认的 Xray dat文件？**
+- **如何恢复 v2rayN 默认的 Xray dat 文件？**
 
   清空 `设置 -> 参数设置 -> v2rayN 设置 -> Geo 文件来源` 后，再次更新 GeoFiles 即可。
 
