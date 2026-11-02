@@ -35,6 +35,9 @@ jobs:
           # 下载官方的 Makefile
           curl -sSL "https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/Makefile" -o "Makefile"
 
+          # 额外下载 Makefile 强制需要的文件
+          curl -sSL "https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/bogus-nxdomain.china.conf" -o "bogus-nxdomain.china.conf"
+
           # 提取纯域名
           make raw
 
